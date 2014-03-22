@@ -5,6 +5,7 @@ import android.widget.ListView;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
@@ -14,12 +15,16 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
 public class ListViewNavigatorTest {
 
     private ListView listView;
     private ListViewNavigator navigator;
+
+    @Mock
+    private PagerNavigationAdapter mockPagerAdapter;
 
     @Before
     public void setUp() {
@@ -66,6 +71,21 @@ public class ListViewNavigatorTest {
         navigator.onPageSelected(selectedPage);
 
         assertEquals(listView.getCheckedItemPosition(), selectedPage);
+    }
+
+    @Test
+    public void testWhenAnItemIsClickedOnTheListView_ThePagerAdapterIsUpdated() {
+        List<CharSequence> exampleNavigationItems = new ArrayList<CharSequence>();
+        exampleNavigationItems.add("one");
+        exampleNavigationItems.add("two");
+        exampleNavigationItems.add("three");
+        int selectedListItem = 2;
+
+        navigator.bindNavigationItems(exampleNavigationItems);
+        navigator.setPagerNavigationAdapter(mockPagerAdapter);
+        listView.performItemClick(null, selectedListItem, selectedListItem);
+
+        verify(mockPagerAdapter).onNavigationItemSelected(selectedListItem);
     }
 
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ public class ListViewNavigator extends Navigator {
         this.listView = listView;
         this.listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         this.listView.setAdapter(listAdapter);
+        this.listView.setOnItemClickListener(itemClickListener);
     }
 
     @Override
@@ -51,4 +53,12 @@ public class ListViewNavigator extends Navigator {
             return convertView;
         }
     }
+
+    private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            onSelectedItem(position);
+        }
+    };
+
 }

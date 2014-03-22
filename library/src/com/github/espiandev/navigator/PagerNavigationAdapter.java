@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener {
+public class PagerNavigationAdapter {
 
     private ViewPager viewPager;
     private Navigator[] navigators;
@@ -15,13 +15,9 @@ public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener
     public PagerNavigationAdapter(ViewPager viewPager, Navigator... navigators) {
         this.navigators = navigators;
         this.viewPager = viewPager;
-        this.viewPager.setOnPageChangeListener(this);
-    }
-
-    @Override
-    public void onPageSelected(int selectedPage) {
+        this.viewPager.setOnPageChangeListener(pageChangeListener);
         for (Navigator navigator : navigators) {
-            navigator.onPageSelected(selectedPage);
+            navigator.setPagerNavigationAdapter(this);
         }
     }
 
@@ -32,7 +28,7 @@ public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener
     private void updateViewPager(int selectedPage) {
         viewPager.setOnPageChangeListener(null);
         viewPager.setCurrentItem(selectedPage);
-        viewPager.setOnPageChangeListener(this);
+        viewPager.setOnPageChangeListener(pageChangeListener);
     }
 
     public void setPagerAdapter(PagerAdapter pagerAdapter) {
@@ -59,4 +55,15 @@ public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener
     public CharSequence getBackupPageTitle(int position) {
         return String.format("Page %d", position);
     }
+
+    private ViewPager.SimpleOnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+            for (Navigator navigator : navigators) {
+                navigator.onPageSelected(position);
+            }
+        }
+    };
+
 }

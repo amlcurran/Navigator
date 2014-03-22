@@ -38,23 +38,7 @@ public class PagerNavigationAdapterTest {
 
         viewPager = new ViewPager(Robolectric.application);
         viewPager.setAdapter(new ThreePagerNotTitledAdapter());
-        pagerNavigationAdapter = new PagerNavigationAdapter(viewPager, mockNavigator) {
-
-            @Override
-            public void onPageSelected(int selectedPage) {
-                super.onPageSelected(selectedPage);
-                currentPage = selectedPage;
-            }
-        };
-    }
-
-    @Test
-    public void testWhenTheViewPagerIsScrolled_TheAdapterIsNotified() {
-        int selectedPage = 2;
-
-        viewPager.setCurrentItem(selectedPage);
-
-        assertEquals(currentPage, selectedPage);
+        pagerNavigationAdapter = new PagerNavigationAdapter(viewPager, mockNavigator);
     }
 
     @Test

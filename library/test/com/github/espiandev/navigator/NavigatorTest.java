@@ -39,6 +39,4 @@ public class NavigatorTest {
         verify(mockNavigationAdapter).onNavigationItemSelected(selectedPage);
     }
 
-
-
 }
