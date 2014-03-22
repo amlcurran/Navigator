@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.espiandev.navigator.ViewPagerAdapter;
+import com.github.espiandev.navigator.PagerNavigationAdapter;
 
 public class MyNavigatorActivity extends Activity {
     /**
@@ -21,7 +21,7 @@ public class MyNavigatorActivity extends Activity {
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.view);
         viewPager.setAdapter(new BasicAdapter());
-        new ViewPagerAdapter(viewPager, new ToastNavigator(this));
+        new PagerNavigationAdapter(viewPager, new ToastNavigator(this));
 
     }
 

@@ -19,10 +19,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
-public class ViewPagerAdapterTest {
+public class PagerNavigationAdapterTest {
 
     private ViewPager viewPager;
-    private ViewPagerAdapter viewPagerAdapter;
+    private PagerNavigationAdapter pagerNavigationAdapter;
 
     @Mock
     private Navigator mockNavigator;
@@ -35,7 +35,7 @@ public class ViewPagerAdapterTest {
 
         viewPager = new ViewPager(Robolectric.application);
         viewPager.setAdapter(new ThreePagerAdapter());
-        viewPagerAdapter = new ViewPagerAdapter(viewPager, mockNavigator) {
+        pagerNavigationAdapter = new PagerNavigationAdapter(viewPager, mockNavigator) {
 
             @Override
             public void onPageSelected(int selectedPage) {
@@ -67,14 +67,14 @@ public class ViewPagerAdapterTest {
     public void testWhenTheNavigatorUpdatesTheAdapter_TheViewPagerScrollsToTheUpdatedPosition() {
         int selectedPage = 1;
 
-        viewPagerAdapter.onNavigated(selectedPage);
+        pagerNavigationAdapter.onNavigated(selectedPage);
 
         assertEquals(selectedPage, viewPager.getCurrentItem());
     }
 
     @Test
     public void testWhenTheNavigatorUpdatesTheAdapter_ItIsNotThenUpdatedAboutThisChange() {
-        viewPagerAdapter.onNavigated(1);
+        pagerNavigationAdapter.onNavigated(1);
 
         verify(mockNavigator, never()).onPageSelected(any(Integer.class));
     }

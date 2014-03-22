@@ -2,12 +2,12 @@ package com.github.espiandev.navigator;
 
 import android.support.v4.view.ViewPager;
 
-public class ViewPagerAdapter extends ViewPager.SimpleOnPageChangeListener {
+public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener {
 
     private ViewPager viewPager;
     private Navigator navigator;
 
-    public ViewPagerAdapter(ViewPager viewPager, Navigator navigator) {
+    public PagerNavigationAdapter(ViewPager viewPager, Navigator navigator) {
         this.navigator = navigator;
         this.viewPager = viewPager;
         this.viewPager.setOnPageChangeListener(this);
