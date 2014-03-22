@@ -56,7 +56,7 @@ public class MyNavigatorActivity extends Activity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return titleArray[position];
+            return null;
         }
     }
 }

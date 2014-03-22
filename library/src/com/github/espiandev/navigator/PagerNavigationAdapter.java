@@ -2,6 +2,7 @@ package com.github.espiandev.navigator;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +42,17 @@ public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener
         List<CharSequence> list = new ArrayList<CharSequence>();
         PagerAdapter adapter = viewPager.getAdapter();
         for (int i = 0; i < adapter.getCount(); i++) {
-            list.add(adapter.getPageTitle(i));
+            CharSequence adapterBackedTitle = adapter.getPageTitle(i);
+            if (TextUtils.isEmpty(adapterBackedTitle)) {
+                list.add(getBackupPageTitle(i));
+            } else {
+                list.add(adapter.getPageTitle(i));
+            }
         }
         return list;
+    }
+
+    public CharSequence getBackupPageTitle(int position) {
+        return String.format("Page %d", position);
     }
 }

@@ -16,6 +16,7 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -36,7 +37,7 @@ public class PagerNavigationAdapterTest {
         MockitoAnnotations.initMocks(this);
 
         viewPager = new ViewPager(Robolectric.application);
-        viewPager.setAdapter(new ThreePagerAdapter());
+        viewPager.setAdapter(new ThreePagerNotTitledAdapter());
         pagerNavigationAdapter = new PagerNavigationAdapter(viewPager, mockNavigator) {
 
             @Override
@@ -83,7 +84,7 @@ public class PagerNavigationAdapterTest {
 
     @Test
     public void testWhenSetAdapterIsCalled_TheAdapterIsPassedToTheViewPager() {
-        PagerAdapter fourPagerAdapter = new FourPagerAdapter();
+        PagerAdapter fourPagerAdapter = new FourPagerTitledAdapter();
         pagerNavigationAdapter.setAdapter(fourPagerAdapter);
 
         assertEquals(fourPagerAdapter, viewPager.getAdapter());
@@ -91,7 +92,7 @@ public class PagerNavigationAdapterTest {
 
     @Test
     public void testWhenSetAdapterIsCalled_TheNavigatorIsUpdatedAboutLabels() {
-        PagerAdapter fourPagerAdapter = new FourPagerAdapter();
+        PagerAdapter fourPagerAdapter = new FourPagerTitledAdapter();
         pagerNavigationAdapter.setAdapter(fourPagerAdapter);
 
         verify(mockNavigator).bindNavigationItems(any(List.class));
@@ -99,7 +100,7 @@ public class PagerNavigationAdapterTest {
 
     @Test
     public void testBuildLabels_PullsLabelsFromTheViewPagerAdapter() {
-        PagerAdapter threePagerAdapter = new ThreePagerAdapter();
+        PagerAdapter threePagerAdapter = new ThreePagerNotTitledAdapter();
         pagerNavigationAdapter.setAdapter(threePagerAdapter);
 
         List<CharSequence> labelsList = pagerNavigationAdapter.buildLabelsList();
@@ -110,7 +111,21 @@ public class PagerNavigationAdapterTest {
         }
     }
 
-    private class ThreePagerAdapter extends PagerAdapter {
+    @Test
+    public void testIfTheAdapterDoesntSupplyLabels_ThenWeMakeLabelsInstead() {
+        PagerAdapter threePagerAdapter = new ThreePagerNotTitledAdapter();
+        pagerNavigationAdapter.setAdapter(threePagerAdapter);
+
+        List<CharSequence> labelsList = pagerNavigationAdapter.buildLabelsList();
+
+        assertEquals(threePagerAdapter.getCount(), labelsList.size());
+        for (int i = 0; i < threePagerAdapter.getCount(); i++) {
+            assertNotNull(labelsList.get(i));
+            assertEquals(pagerNavigationAdapter.getBackupPageTitle(i), labelsList.get(i));
+        }
+    }
+
+    private class ThreePagerNotTitledAdapter extends PagerAdapter {
 
         @Override
         public int getCount() {
@@ -127,13 +142,9 @@ public class PagerNavigationAdapterTest {
             return super.instantiateItem(container, position);
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return super.getPageTitle(position);
-        }
     }
 
-    private class FourPagerAdapter extends PagerAdapter {
+    private class FourPagerTitledAdapter extends PagerAdapter {
 
         @Override
         public int getCount() {
@@ -148,6 +159,11 @@ public class PagerNavigationAdapterTest {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             return super.instantiateItem(container, position);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "page";
         }
     }
 
