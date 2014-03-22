@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.github.espiandev.navigator.ListViewNavigator;
 import com.github.espiandev.navigator.Navigator;
@@ -52,7 +53,7 @@ public class MyNavigatorActivity extends Activity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View item = new View(MyNavigatorActivity.this);
+            TextView item = new TextView(MyNavigatorActivity.this);
             item.setBackgroundColor(colourArray[position]);
             container.addView(item);
             return item;
