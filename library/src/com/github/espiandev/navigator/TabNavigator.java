@@ -22,6 +22,9 @@ import android.app.FragmentTransaction;
 
 import java.util.List;
 
+/**
+ * Navigator which uses {@link android.app.ActionBar} tabs to provide navigation of the ViewPager
+ */
 public class TabNavigator extends Navigator {
 
     private final ActionBar actionBar;
