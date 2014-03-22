@@ -59,4 +59,13 @@ public class ListViewNavigatorTest {
         assertEquals(listView.getAdapter().getItem(1), exampleNavigationItems.get(1));
     }
 
+    @Test
+    public void testWhenAPageIsSelected_TheListViewSetsThatItemChecked() {
+        int selectedPage = 2;
+
+        navigator.onPageSelected(selectedPage);
+
+        assertEquals(listView.getCheckedItemPosition(), selectedPage);
+    }
+
 }

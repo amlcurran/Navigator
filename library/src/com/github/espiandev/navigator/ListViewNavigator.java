@@ -18,12 +18,13 @@ public class ListViewNavigator extends Navigator {
     public ListViewNavigator(Context context, ListView listView) {
         this.listAdapter = new NavigatorAdapter(context, android.R.layout.simple_list_item_activated_1);
         this.listView = listView;
+        this.listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         this.listView.setAdapter(listAdapter);
     }
 
     @Override
     public void onPageSelected(int selectedPage) {
-
+        this.listView.setItemChecked(selectedPage, true);
     }
 
     @Override
