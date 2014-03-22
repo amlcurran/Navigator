@@ -8,6 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.espiandev.navigator.ViewPagerAdapter;
+
 public class MyNavigatorActivity extends Activity {
     /**
      * Called when the activity is first created.
@@ -19,6 +21,7 @@ public class MyNavigatorActivity extends Activity {
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.view);
         viewPager.setAdapter(new BasicAdapter());
+        new ViewPagerAdapter(viewPager, new ToastNavigator(this));
 
     }
 
