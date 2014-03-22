@@ -1,5 +1,6 @@
 package com.github.espiandev.navigator;
 
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
 public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener {
@@ -18,7 +19,7 @@ public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener
         navigator.onPageSelected(selectedPage);
     }
 
-    public void onNavigated(int selectedPage) {
+    public void onNavigationItemSelected(int selectedPage) {
         updateViewPager(selectedPage);
     }
 
@@ -26,5 +27,9 @@ public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener
         viewPager.setOnPageChangeListener(null);
         viewPager.setCurrentItem(selectedPage);
         viewPager.setOnPageChangeListener(this);
+    }
+
+    public void setAdapter(PagerAdapter pagerAdapter) {
+        viewPager.setAdapter(pagerAdapter);
     }
 }

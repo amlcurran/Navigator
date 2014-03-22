@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import com.github.espiandev.navigator.Navigator;
 
-public class ToastNavigator implements Navigator {
+public class ToastNavigator extends Navigator {
 
     private Context context;
 

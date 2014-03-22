@@ -67,16 +67,24 @@ public class PagerNavigationAdapterTest {
     public void testWhenTheNavigatorUpdatesTheAdapter_TheViewPagerScrollsToTheUpdatedPosition() {
         int selectedPage = 1;
 
-        pagerNavigationAdapter.onNavigated(selectedPage);
+        pagerNavigationAdapter.onNavigationItemSelected(selectedPage);
 
         assertEquals(selectedPage, viewPager.getCurrentItem());
     }
 
     @Test
     public void testWhenTheNavigatorUpdatesTheAdapter_ItIsNotThenUpdatedAboutThisChange() {
-        pagerNavigationAdapter.onNavigated(1);
+        pagerNavigationAdapter.onNavigationItemSelected(1);
 
         verify(mockNavigator, never()).onPageSelected(any(Integer.class));
+    }
+
+    @Test
+    public void testWhenSetAdapterIsCalled_TheAdapterIsPassedToTheViewPager() {
+        PagerAdapter fourPagerAdapter = new FourPagerAdapter();
+        pagerNavigationAdapter.setAdapter(fourPagerAdapter);
+
+        assertEquals(fourPagerAdapter, viewPager.getAdapter());
     }
 
     private class ThreePagerAdapter extends PagerAdapter {
@@ -84,6 +92,24 @@ public class PagerNavigationAdapterTest {
         @Override
         public int getCount() {
             return 3;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view.equals(object);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            return super.instantiateItem(container, position);
+        }
+    }
+
+    private class FourPagerAdapter extends PagerAdapter {
+
+        @Override
+        public int getCount() {
+            return 4;
         }
 
         @Override
