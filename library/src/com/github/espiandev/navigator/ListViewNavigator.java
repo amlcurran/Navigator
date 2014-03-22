@@ -12,8 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * {@link com.github.espiandev.navigator.Navigator} that uses a ListView to handle navigation.
- * This is ideal for creating a {@link android.support.v4.widget.DrawerLayout} based navigation model.
+ * {@link com.github.espiandev.navigator.Navigator} that uses a ListView. This is ideal for creating a {@link android.support.v4.widget.DrawerLayout}-based navigation model.
  */
 public class ListViewNavigator extends Navigator {
 
@@ -40,7 +39,7 @@ public class ListViewNavigator extends Navigator {
         listAdapter.addAll(labels);
     }
 
-    public static class NavigatorAdapter extends ArrayAdapter<CharSequence> {
+    private static class NavigatorAdapter extends ArrayAdapter<CharSequence> {
 
         public NavigatorAdapter(Context context, int resource) {
             super(context, resource);

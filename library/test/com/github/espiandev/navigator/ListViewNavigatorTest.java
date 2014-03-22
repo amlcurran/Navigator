@@ -1,5 +1,6 @@
 package com.github.espiandev.navigator;
 
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.junit.Before;
@@ -35,7 +36,7 @@ public class ListViewNavigatorTest {
 
     @Test
     public void testANavigationAdapterIsSetOnTheListView() {
-        assertTrue(listView.getAdapter() instanceof ListViewNavigator.NavigatorAdapter);
+        assertTrue(listView.getAdapter() instanceof ArrayAdapter);
     }
 
     @Test

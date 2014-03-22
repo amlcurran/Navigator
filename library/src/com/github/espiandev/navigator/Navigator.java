@@ -19,7 +19,7 @@ package com.github.espiandev.navigator;
 import java.util.List;
 
 /**
- * Abstract class which represents a control that handles navigation between equivalent levels,
+ * Abstract class which represents a control that handles navigation between pages on a ViewPager,
  * for example ActionBar tabs or a hipster-nav drawer.
  */
 public abstract class Navigator {
