@@ -20,8 +20,8 @@ public class MyNavigatorActivity extends Activity {
         setContentView(R.layout.main);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.view);
-        viewPager.setAdapter(new BasicAdapter());
-        new PagerNavigationAdapter(viewPager, new ToastNavigator(this));
+        PagerNavigationAdapter pagerNavigationAdapter = new PagerNavigationAdapter(viewPager, new ToastNavigator(this));
+        pagerNavigationAdapter.setAdapter(new BasicAdapter());
 
     }
 
@@ -29,6 +29,7 @@ public class MyNavigatorActivity extends Activity {
 
         private int[] colourArray = new int[] {Color.BLUE,
             Color.RED, Color.GREEN, Color.YELLOW, Color.MAGENTA };
+        private String[] titleArray = new String[] { "Blue", "Red", "Green", "Yellow", "Magenta" };
 
         @Override
         public int getCount() {
@@ -51,6 +52,11 @@ public class MyNavigatorActivity extends Activity {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titleArray[position];
         }
     }
 }

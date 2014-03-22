@@ -22,7 +22,7 @@ public class ToastNavigator extends Navigator {
     }
 
     @Override
-    public void bindNavigationItems(List<String> labels) {
-
+    public void bindNavigationItems(List<CharSequence> labels) {
+        Toast.makeText(context, labels.toString(), Toast.LENGTH_SHORT).show();
     }
 }
