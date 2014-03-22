@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
+
 import static org.mockito.Mockito.verify;
 
 public class NavigatorTest {
@@ -14,6 +16,11 @@ public class NavigatorTest {
     private Navigator basicNavigator = new Navigator() {
         @Override
         public void onPageSelected(int selectedPage) {
+
+        }
+
+        @Override
+        public void bindNavigationItems(List<CharSequence> labels) {
 
         }
     };

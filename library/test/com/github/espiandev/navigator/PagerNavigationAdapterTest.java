@@ -13,6 +13,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
@@ -87,6 +89,27 @@ public class PagerNavigationAdapterTest {
         assertEquals(fourPagerAdapter, viewPager.getAdapter());
     }
 
+    @Test
+    public void testWhenSetAdapterIsCalled_TheNavigatorIsUpdatedAboutLabels() {
+        PagerAdapter fourPagerAdapter = new FourPagerAdapter();
+        pagerNavigationAdapter.setAdapter(fourPagerAdapter);
+
+        verify(mockNavigator).bindNavigationItems(any(List.class));
+    }
+
+    @Test
+    public void testBuildLabels_PullsLabelsFromTheViewPagerAdapter() {
+        PagerAdapter threePagerAdapter = new ThreePagerAdapter();
+        pagerNavigationAdapter.setAdapter(threePagerAdapter);
+
+        List<CharSequence> labelsList = pagerNavigationAdapter.buildLabelsList();
+
+        assertEquals(threePagerAdapter.getCount(), labelsList.size());
+        for (int i = 0; i < threePagerAdapter.getCount(); i++) {
+            assertEquals(threePagerAdapter.getPageTitle(i), labelsList.get(i));
+        }
+    }
+
     private class ThreePagerAdapter extends PagerAdapter {
 
         @Override
@@ -102,6 +125,11 @@ public class PagerNavigationAdapterTest {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             return super.instantiateItem(container, position);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return super.getPageTitle(position);
         }
     }
 
