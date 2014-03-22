@@ -10,17 +10,19 @@ import java.util.List;
 public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener {
 
     private ViewPager viewPager;
-    private Navigator navigator;
+    private Navigator[] navigators;
 
-    public PagerNavigationAdapter(ViewPager viewPager, Navigator navigator) {
-        this.navigator = navigator;
+    public PagerNavigationAdapter(ViewPager viewPager, Navigator... navigators) {
+        this.navigators = navigators;
         this.viewPager = viewPager;
         this.viewPager.setOnPageChangeListener(this);
     }
 
     @Override
     public void onPageSelected(int selectedPage) {
-        navigator.onPageSelected(selectedPage);
+        for (Navigator navigator : navigators) {
+            navigator.onPageSelected(selectedPage);
+        }
     }
 
     public void onNavigationItemSelected(int selectedPage) {
@@ -33,9 +35,11 @@ public class PagerNavigationAdapter extends ViewPager.SimpleOnPageChangeListener
         viewPager.setOnPageChangeListener(this);
     }
 
-    public void setAdapter(PagerAdapter pagerAdapter) {
+    public void setPagerAdapter(PagerAdapter pagerAdapter) {
         viewPager.setAdapter(pagerAdapter);
-        navigator.bindNavigationItems(buildLabelsList());
+        for (Navigator navigator : navigators) {
+            navigator.bindNavigationItems(buildLabelsList());
+        }
     }
 
     public List<CharSequence> buildLabelsList() {

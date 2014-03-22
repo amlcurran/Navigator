@@ -85,7 +85,7 @@ public class PagerNavigationAdapterTest {
     @Test
     public void testWhenSetAdapterIsCalled_TheAdapterIsPassedToTheViewPager() {
         PagerAdapter fourPagerAdapter = new FourPagerTitledAdapter();
-        pagerNavigationAdapter.setAdapter(fourPagerAdapter);
+        pagerNavigationAdapter.setPagerAdapter(fourPagerAdapter);
 
         assertEquals(fourPagerAdapter, viewPager.getAdapter());
     }
@@ -93,7 +93,7 @@ public class PagerNavigationAdapterTest {
     @Test
     public void testWhenSetAdapterIsCalled_TheNavigatorIsUpdatedAboutLabels() {
         PagerAdapter fourPagerAdapter = new FourPagerTitledAdapter();
-        pagerNavigationAdapter.setAdapter(fourPagerAdapter);
+        pagerNavigationAdapter.setPagerAdapter(fourPagerAdapter);
 
         verify(mockNavigator).bindNavigationItems(any(List.class));
     }
@@ -101,7 +101,7 @@ public class PagerNavigationAdapterTest {
     @Test
     public void testBuildLabels_PullsLabelsFromTheViewPagerAdapter() {
         PagerAdapter adapter = new FourPagerTitledAdapter();
-        pagerNavigationAdapter.setAdapter(adapter);
+        pagerNavigationAdapter.setPagerAdapter(adapter);
 
         List<CharSequence> labelsList = pagerNavigationAdapter.buildLabelsList();
 
@@ -114,7 +114,7 @@ public class PagerNavigationAdapterTest {
     @Test
     public void testIfTheAdapterDoesntSupplyLabels_ThenWeMakeLabelsInstead() {
         PagerAdapter adapter = new ThreePagerNotTitledAdapter();
-        pagerNavigationAdapter.setAdapter(adapter);
+        pagerNavigationAdapter.setPagerAdapter(adapter);
 
         List<CharSequence> labelsList = pagerNavigationAdapter.buildLabelsList();
 

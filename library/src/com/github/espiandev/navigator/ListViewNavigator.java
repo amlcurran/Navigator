@@ -28,12 +28,12 @@ public class ListViewNavigator extends Navigator {
 
     @Override
     public void bindNavigationItems(List<CharSequence> labels) {
+        listView.setAdapter(listAdapter);
         listAdapter.clear();
         listAdapter.addAll(labels);
-        listAdapter.notifyDataSetChanged();
     }
 
-    public class NavigatorAdapter extends ArrayAdapter<CharSequence> {
+    public static class NavigatorAdapter extends ArrayAdapter<CharSequence> {
 
         public NavigatorAdapter(Context context, int resource) {
             super(context, resource);

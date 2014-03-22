@@ -25,10 +25,11 @@ public class MyNavigatorActivity extends Activity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.view);
         ListView navListView = (ListView) findViewById(R.id.listView);
 
-        Navigator navigator = new ListViewNavigator(this, navListView);
+        Navigator listNavigator = new ListViewNavigator(this, navListView);
+        Navigator toastNavigator = new ToastNavigator(this);
 
-        PagerNavigationAdapter pagerNavigationAdapter = new PagerNavigationAdapter(viewPager, navigator);
-        pagerNavigationAdapter.setAdapter(new BasicAdapter());
+        PagerNavigationAdapter pagerNavigationAdapter = new PagerNavigationAdapter(viewPager, listNavigator, toastNavigator);
+        pagerNavigationAdapter.setPagerAdapter(new BasicAdapter());
 
     }
 
@@ -63,7 +64,7 @@ public class MyNavigatorActivity extends Activity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return null;
+            return titleArray[position];
         }
     }
 }
