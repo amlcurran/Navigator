@@ -48,6 +48,7 @@ public class TabNavigatorTest {
 
         activity = Robolectric.buildActivity(Activity.class).create().start().resume().get();
         navigator = new TabNavigator(activity);
+        navigator.setLinker(mockLinker);
         actionBar = activity.getActionBar();
     }
 
@@ -103,7 +104,7 @@ public class TabNavigatorTest {
         List<CharSequence> exampleNavigationItems = ListViewNavigatorTest.createNavLabels();
         int selectedListItem = 2;
 
-        navigator.setPagerNavigationAdapter(mockLinker);
+        navigator.setLinker(mockLinker);
         navigator.bindNavigationItems(exampleNavigationItems);
         actionBar.selectTab(actionBar.getTabAt(selectedListItem));
 

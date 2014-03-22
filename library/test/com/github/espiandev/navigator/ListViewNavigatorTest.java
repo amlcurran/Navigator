@@ -74,7 +74,7 @@ public class ListViewNavigatorTest {
         int selectedListItem = 2;
 
         navigator.bindNavigationItems(exampleNavigationItems);
-        navigator.setPagerNavigationAdapter(mockPagerAdapter);
+        navigator.setLinker(mockPagerAdapter);
         listView.performItemClick(null, selectedListItem, selectedListItem);
 
         verify(mockPagerAdapter).onNavigationItemSelected(selectedListItem);

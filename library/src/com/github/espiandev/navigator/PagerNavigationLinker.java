@@ -20,7 +20,7 @@ public class PagerNavigationLinker {
         this.navigator = navigator;
         this.viewPager = viewPager;
         this.viewPager.setOnPageChangeListener(pageChangeListener);
-        navigator.setPagerNavigationAdapter(this);
+        navigator.setLinker(this);
     }
 
     void onNavigationItemSelected(int selectedPage) {

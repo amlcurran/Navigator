@@ -33,12 +33,13 @@ public abstract class Navigator {
     public abstract void onPageSelected(int selectedPage);
 
     /**
-     * Method which should deal with creating the navigation UI from the labels
+     * Called when the {@link android.support.v4.view.ViewPager} has a list of pages and these should be fed into a navigation model. The Navigator
+     * should therefore render these into the appropriate UI
      * @param labels list of the pages which the {@link android.support.v4.view.ViewPager} contains
      */
     public abstract void bindNavigationItems(List<CharSequence> labels);
 
-    void setPagerNavigationAdapter(PagerNavigationLinker navigationAdapter) {
+    void setLinker(PagerNavigationLinker navigationAdapter) {
         this.navigationAdapter = navigationAdapter;
     }
 

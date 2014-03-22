@@ -33,7 +33,7 @@ public class NavigatorTest {
     @Test
     public void testOnSelectedItem_NotifiesThePagerAdapter() throws Exception {
         int selectedPage = 1;
-        basicNavigator.setPagerNavigationAdapter(mockNavigationAdapter);
+        basicNavigator.setLinker(mockNavigationAdapter);
         basicNavigator.onNavigationItemSelected(selectedPage);
 
         verify(mockNavigationAdapter).onNavigationItemSelected(selectedPage);

@@ -22,7 +22,7 @@ import android.app.FragmentTransaction;
 
 import java.util.List;
 
-public class TabNavigator extends Navigator implements ActionBar.TabListener {
+public class TabNavigator extends Navigator {
 
     private final ActionBar actionBar;
 
@@ -42,22 +42,25 @@ public class TabNavigator extends Navigator implements ActionBar.TabListener {
         for (CharSequence charSequence : labels) {
             actionBar.addTab(actionBar.newTab()
                     .setText(charSequence)
-                    .setTabListener(this));
+                    .setTabListener(tabListener));
         }
     }
 
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        onNavigationItemSelected(tab.getPosition());
-    }
+    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+        @Override
+        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+            onNavigationItemSelected(tab.getPosition());
+        }
 
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+        @Override
+        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
-    }
+        }
 
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+        @Override
+        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
-    }
+        }
+    };
+
 }
