@@ -89,4 +89,15 @@
     <!-- version-tag: 1 -->
     <import file="${sdk.dir}/tools/ant/build.xml"/>
 
+    <target name="jar">
+        <jar destfile="navigator-library.jar" basedir="../../out/production/library/">
+            <!-- replace 'com' by what ever you are using -->
+            <!-- as first part of the package name -->
+            <!-- e.g. de, org, ... -->
+            <!-- the ** is important to include the directory recursively -->
+            <include name="com/**" />
+        </jar>
+    </target>
+
+
 </project>
