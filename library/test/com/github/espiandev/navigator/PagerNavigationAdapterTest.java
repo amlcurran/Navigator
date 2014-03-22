@@ -100,26 +100,26 @@ public class PagerNavigationAdapterTest {
 
     @Test
     public void testBuildLabels_PullsLabelsFromTheViewPagerAdapter() {
-        PagerAdapter threePagerAdapter = new ThreePagerNotTitledAdapter();
-        pagerNavigationAdapter.setAdapter(threePagerAdapter);
+        PagerAdapter adapter = new FourPagerTitledAdapter();
+        pagerNavigationAdapter.setAdapter(adapter);
 
         List<CharSequence> labelsList = pagerNavigationAdapter.buildLabelsList();
 
-        assertEquals(threePagerAdapter.getCount(), labelsList.size());
-        for (int i = 0; i < threePagerAdapter.getCount(); i++) {
-            assertEquals(threePagerAdapter.getPageTitle(i), labelsList.get(i));
+        assertEquals(adapter.getCount(), labelsList.size());
+        for (int i = 0; i < adapter.getCount(); i++) {
+            assertEquals(adapter.getPageTitle(i), labelsList.get(i));
         }
     }
 
     @Test
     public void testIfTheAdapterDoesntSupplyLabels_ThenWeMakeLabelsInstead() {
-        PagerAdapter threePagerAdapter = new ThreePagerNotTitledAdapter();
-        pagerNavigationAdapter.setAdapter(threePagerAdapter);
+        PagerAdapter adapter = new ThreePagerNotTitledAdapter();
+        pagerNavigationAdapter.setAdapter(adapter);
 
         List<CharSequence> labelsList = pagerNavigationAdapter.buildLabelsList();
 
-        assertEquals(threePagerAdapter.getCount(), labelsList.size());
-        for (int i = 0; i < threePagerAdapter.getCount(); i++) {
+        assertEquals(adapter.getCount(), labelsList.size());
+        for (int i = 0; i < adapter.getCount(); i++) {
             assertNotNull(labelsList.get(i));
             assertEquals(pagerNavigationAdapter.getBackupPageTitle(i), labelsList.get(i));
         }
