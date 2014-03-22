@@ -30,8 +30,6 @@ public class PagerNavigationLinkerTest {
     @Mock
     private Navigator mockNavigator;
 
-    private int currentPage;
-
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);

@@ -41,10 +41,7 @@ public class ListViewNavigatorTest {
 
     @Test
     public void testBindNavigationItems_AddsItemsToTheAdapter() {
-        List<CharSequence> exampleNavigationItems = new ArrayList<CharSequence>();
-        exampleNavigationItems.add("one");
-        exampleNavigationItems.add("two");
-        exampleNavigationItems.add("three");
+        List<CharSequence> exampleNavigationItems = createNavLabels();
 
         navigator.bindNavigationItems(exampleNavigationItems);
 
@@ -53,10 +50,7 @@ public class ListViewNavigatorTest {
 
     @Test
     public void testBindNavigationItems_DoesntKeepPreviousItems() {
-        List<CharSequence> exampleNavigationItems = new ArrayList<CharSequence>();
-        exampleNavigationItems.add("one");
-        exampleNavigationItems.add("two");
-        exampleNavigationItems.add("three");
+        List<CharSequence> exampleNavigationItems = createNavLabels();
 
         navigator.bindNavigationItems(exampleNavigationItems);
         navigator.bindNavigationItems(exampleNavigationItems);
@@ -76,10 +70,7 @@ public class ListViewNavigatorTest {
 
     @Test
     public void testWhenAnItemIsClickedOnTheListView_ThePagerAdapterIsUpdated() {
-        List<CharSequence> exampleNavigationItems = new ArrayList<CharSequence>();
-        exampleNavigationItems.add("one");
-        exampleNavigationItems.add("two");
-        exampleNavigationItems.add("three");
+        List<CharSequence> exampleNavigationItems = createNavLabels();
         int selectedListItem = 2;
 
         navigator.bindNavigationItems(exampleNavigationItems);
@@ -87,6 +78,14 @@ public class ListViewNavigatorTest {
         listView.performItemClick(null, selectedListItem, selectedListItem);
 
         verify(mockPagerAdapter).onNavigationItemSelected(selectedListItem);
+    }
+
+    static List<CharSequence> createNavLabels() {
+        List<CharSequence> exampleNavigationItems = new ArrayList<CharSequence>();
+        exampleNavigationItems.add("one");
+        exampleNavigationItems.add("two");
+        exampleNavigationItems.add("three");
+        return exampleNavigationItems;
     }
 
 }

@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.github.espiandev.navigator.ListViewNavigator;
 import com.github.espiandev.navigator.Navigator;
 import com.github.espiandev.navigator.PagerNavigationLinker;
+import com.github.espiandev.navigator.TabNavigator;
 
 public class MyNavigatorActivity extends Activity {
     /**
@@ -26,8 +27,9 @@ public class MyNavigatorActivity extends Activity {
         ListView navListView = (ListView) findViewById(R.id.listView);
 
         Navigator listNavigator = new ListViewNavigator(this, navListView);
+        Navigator tabNavigation = new TabNavigator(this);
 
-        PagerNavigationLinker pagerNavigationLinker = new PagerNavigationLinker(viewPager, listNavigator);
+        PagerNavigationLinker pagerNavigationLinker = new PagerNavigationLinker(viewPager, tabNavigation);
         pagerNavigationLinker.setPagerAdapter(new BasicAdapter());
 
     }
