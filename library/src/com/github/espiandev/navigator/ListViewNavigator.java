@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/**
+ * {@link com.github.espiandev.navigator.Navigator} that uses a ListView to handle navigation.
+ * This is ideal for creating a {@link android.support.v4.widget.DrawerLayout} based navigation model.
+ */
 public class ListViewNavigator extends Navigator {
 
     private final NavigatorAdapter listAdapter;
@@ -57,7 +61,7 @@ public class ListViewNavigator extends Navigator {
     private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            onSelectedItem(position);
+            onNavigationItemSelected(position);
         }
     };
 

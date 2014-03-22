@@ -24,7 +24,7 @@ public class ListViewNavigatorTest {
     private ListViewNavigator navigator;
 
     @Mock
-    private PagerNavigationAdapter mockPagerAdapter;
+    private PagerNavigationLinker mockPagerAdapter;
 
     @Before
     public void setUp() {

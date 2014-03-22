@@ -22,10 +22,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
-public class PagerNavigationAdapterTest {
+public class PagerNavigationLinkerTest {
 
     private ViewPager viewPager;
-    private PagerNavigationAdapter pagerNavigationAdapter;
+    private PagerNavigationLinker pagerNavigationLinker;
 
     @Mock
     private Navigator mockNavigator;
@@ -38,7 +38,7 @@ public class PagerNavigationAdapterTest {
 
         viewPager = new ViewPager(Robolectric.application);
         viewPager.setAdapter(new ThreePagerNotTitledAdapter());
-        pagerNavigationAdapter = new PagerNavigationAdapter(viewPager, mockNavigator);
+        pagerNavigationLinker = new PagerNavigationLinker(viewPager, mockNavigator);
     }
 
     @Test
@@ -54,14 +54,14 @@ public class PagerNavigationAdapterTest {
     public void testWhenTheNavigatorUpdatesTheAdapter_TheViewPagerScrollsToTheUpdatedPosition() {
         int selectedPage = 1;
 
-        pagerNavigationAdapter.onNavigationItemSelected(selectedPage);
+        pagerNavigationLinker.onNavigationItemSelected(selectedPage);
 
         assertEquals(selectedPage, viewPager.getCurrentItem());
     }
 
     @Test
     public void testWhenTheNavigatorUpdatesTheAdapter_ItIsNotThenUpdatedAboutThisChange() {
-        pagerNavigationAdapter.onNavigationItemSelected(1);
+        pagerNavigationLinker.onNavigationItemSelected(1);
 
         verify(mockNavigator, never()).onPageSelected(any(Integer.class));
     }
@@ -69,7 +69,7 @@ public class PagerNavigationAdapterTest {
     @Test
     public void testWhenSetAdapterIsCalled_TheAdapterIsPassedToTheViewPager() {
         PagerAdapter fourPagerAdapter = new FourPagerTitledAdapter();
-        pagerNavigationAdapter.setPagerAdapter(fourPagerAdapter);
+        pagerNavigationLinker.setPagerAdapter(fourPagerAdapter);
 
         assertEquals(fourPagerAdapter, viewPager.getAdapter());
     }
@@ -77,7 +77,7 @@ public class PagerNavigationAdapterTest {
     @Test
     public void testWhenSetAdapterIsCalled_TheNavigatorIsUpdatedAboutLabels() {
         PagerAdapter fourPagerAdapter = new FourPagerTitledAdapter();
-        pagerNavigationAdapter.setPagerAdapter(fourPagerAdapter);
+        pagerNavigationLinker.setPagerAdapter(fourPagerAdapter);
 
         verify(mockNavigator).bindNavigationItems(any(List.class));
     }
@@ -85,9 +85,9 @@ public class PagerNavigationAdapterTest {
     @Test
     public void testBuildLabels_PullsLabelsFromTheViewPagerAdapter() {
         PagerAdapter adapter = new FourPagerTitledAdapter();
-        pagerNavigationAdapter.setPagerAdapter(adapter);
+        pagerNavigationLinker.setPagerAdapter(adapter);
 
-        List<CharSequence> labelsList = pagerNavigationAdapter.buildLabelsList();
+        List<CharSequence> labelsList = pagerNavigationLinker.buildLabelsList();
 
         assertEquals(adapter.getCount(), labelsList.size());
         for (int i = 0; i < adapter.getCount(); i++) {
@@ -98,14 +98,14 @@ public class PagerNavigationAdapterTest {
     @Test
     public void testIfTheAdapterDoesntSupplyLabels_ThenWeMakeLabelsInstead() {
         PagerAdapter adapter = new ThreePagerNotTitledAdapter();
-        pagerNavigationAdapter.setPagerAdapter(adapter);
+        pagerNavigationLinker.setPagerAdapter(adapter);
 
-        List<CharSequence> labelsList = pagerNavigationAdapter.buildLabelsList();
+        List<CharSequence> labelsList = pagerNavigationLinker.buildLabelsList();
 
         assertEquals(adapter.getCount(), labelsList.size());
         for (int i = 0; i < adapter.getCount(); i++) {
             assertNotNull(labelsList.get(i));
-            assertEquals(pagerNavigationAdapter.getBackupPageTitle(i), labelsList.get(i));
+            assertEquals(pagerNavigationLinker.getBackupPageTitle(i), labelsList.get(i));
         }
     }
 

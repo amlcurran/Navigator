@@ -7,21 +7,19 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PagerNavigationAdapter {
+public class PagerNavigationLinker {
 
     private ViewPager viewPager;
-    private Navigator[] navigators;
+    private Navigator navigator;
 
-    public PagerNavigationAdapter(ViewPager viewPager, Navigator... navigators) {
-        this.navigators = navigators;
+    public PagerNavigationLinker(ViewPager viewPager, Navigator navigator) {
+        this.navigator = navigator;
         this.viewPager = viewPager;
         this.viewPager.setOnPageChangeListener(pageChangeListener);
-        for (Navigator navigator : navigators) {
-            navigator.setPagerNavigationAdapter(this);
-        }
+        navigator.setPagerNavigationAdapter(this);
     }
 
-    public void onNavigationItemSelected(int selectedPage) {
+    void onNavigationItemSelected(int selectedPage) {
         updateViewPager(selectedPage);
     }
 
@@ -33,12 +31,10 @@ public class PagerNavigationAdapter {
 
     public void setPagerAdapter(PagerAdapter pagerAdapter) {
         viewPager.setAdapter(pagerAdapter);
-        for (Navigator navigator : navigators) {
-            navigator.bindNavigationItems(buildLabelsList());
-        }
+        navigator.bindNavigationItems(buildLabelsList());
     }
 
-    public List<CharSequence> buildLabelsList() {
+    protected List<CharSequence> buildLabelsList() {
         List<CharSequence> list = new ArrayList<CharSequence>();
         PagerAdapter adapter = viewPager.getAdapter();
         for (int i = 0; i < adapter.getCount(); i++) {
@@ -52,7 +48,7 @@ public class PagerNavigationAdapter {
         return list;
     }
 
-    public CharSequence getBackupPageTitle(int position) {
+    protected CharSequence getBackupPageTitle(int position) {
         return String.format("Page %d", position);
     }
 
@@ -60,9 +56,7 @@ public class PagerNavigationAdapter {
 
         @Override
         public void onPageSelected(int position) {
-            for (Navigator navigator : navigators) {
-                navigator.onPageSelected(position);
-            }
+            navigator.onPageSelected(position);
         }
     };
 

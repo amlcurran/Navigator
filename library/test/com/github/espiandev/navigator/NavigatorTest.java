@@ -12,7 +12,7 @@ import static org.mockito.Mockito.verify;
 public class NavigatorTest {
 
     @Mock
-    private PagerNavigationAdapter mockNavigationAdapter;
+    private PagerNavigationLinker mockNavigationAdapter;
     private Navigator basicNavigator = new Navigator() {
         @Override
         public void onPageSelected(int selectedPage) {
@@ -34,7 +34,7 @@ public class NavigatorTest {
     public void testOnSelectedItem_NotifiesThePagerAdapter() throws Exception {
         int selectedPage = 1;
         basicNavigator.setPagerNavigationAdapter(mockNavigationAdapter);
-        basicNavigator.onSelectedItem(selectedPage);
+        basicNavigator.onNavigationItemSelected(selectedPage);
 
         verify(mockNavigationAdapter).onNavigationItemSelected(selectedPage);
     }
