@@ -17,7 +17,7 @@ How?
     
 That's it. Genuinely everything! You'll get some nice tabs, and when you swipe between your pages, they'll update. And when you click on a tab, your ViewPager will scroll to the right page. Magic!
 
-Check the releases tab to get the latest .JAR. No, it isn't available as an .AAR or .apklib, because it is simple enough to be a .JAR. And I think my Maven repository is broken...
+Check the releases tab to get the latest .JAR. No, it isn't available as an .AAR or .apklib, because it is simple enough to be a .JAR. And I think my Maven repository is broken... You'll need the support v4 library as a dependency too.
 
 What else?
 ----
