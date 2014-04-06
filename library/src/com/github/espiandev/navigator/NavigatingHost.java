@@ -22,7 +22,9 @@ public abstract class NavigatingHost {
     /**
      * Called when the user has selected a navigation item and the host should be updated to reflect this
      */
-    protected void onNavigationItemSelected(int selectedPage) {
-        linker.onNavigationItemSelected(selectedPage);
+    protected abstract void onNavigationItemSelected(int selectedPage);
+
+    protected void onNavigatingHostNavigated(int selectedPage) {
+        linker.onNavigatingHostNavigated(selectedPage);
     }
 }

@@ -55,7 +55,7 @@ public class ViewPagerNavigatingHost extends NavigatingHost {
 
         @Override
         public void onPageSelected(int position) {
-            linker.onNavigatingHostNavigated(position);
+            onNavigatingHostNavigated(position);
         }
     };
 
