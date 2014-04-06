@@ -14,6 +14,7 @@ import com.github.espiandev.navigator.ListViewNavigator;
 import com.github.espiandev.navigator.Navigator;
 import com.github.espiandev.navigator.PagerNavigationLinker;
 import com.github.espiandev.navigator.TabNavigator;
+import com.github.espiandev.navigator.ViewPagerNavigatingHost;
 
 public class MyNavigatorActivity extends Activity {
     /**
@@ -30,8 +31,10 @@ public class MyNavigatorActivity extends Activity {
         Navigator listNavigator = new ListViewNavigator(this, navListView);
         Navigator tabNavigation = new TabNavigator(this);
 
-        PagerNavigationLinker pagerNavigationLinker = new PagerNavigationLinker(viewPager, tabNavigation);
-        pagerNavigationLinker.setPagerAdapter(new BasicAdapter());
+        ViewPagerNavigatingHost viewPagerHost = new ViewPagerNavigatingHost(viewPager);
+
+        PagerNavigationLinker pagerNavigationLinker = new PagerNavigationLinker(viewPagerHost, tabNavigation);
+        viewPagerHost.setPagerAdapter(new BasicAdapter());
 
     }
 

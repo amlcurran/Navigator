@@ -16,7 +16,7 @@ public class ToastNavigator extends Navigator {
     }
 
     @Override
-    public void onPageSelected(int selectedPage) {
+    protected void onHostNavigated(int selectedPage) {
         String toast = context.getString(R.string.toast_template, selectedPage);
         Toast.makeText(context, toast, Toast.LENGTH_SHORT).show();
     }

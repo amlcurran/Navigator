@@ -15,7 +15,7 @@ public class NavigatorTest {
     private PagerNavigationLinker mockNavigationAdapter;
     private Navigator basicNavigator = new Navigator() {
         @Override
-        public void onPageSelected(int selectedPage) {
+        public void onHostNavigated(int selectedPage) {
 
         }
 

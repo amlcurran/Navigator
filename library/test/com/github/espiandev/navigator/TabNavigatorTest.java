@@ -94,7 +94,7 @@ public class TabNavigatorTest {
         int selectedPage = 2;
 
         navigator.bindNavigationItems(exampleNavigationItems);
-        navigator.onPageSelected(selectedPage);
+        navigator.onHostNavigated(selectedPage);
 
         assertEquals(actionBar.getSelectedTab().getPosition(), selectedPage);
     }

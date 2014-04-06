@@ -35,7 +35,7 @@ public class TabNavigator extends Navigator {
     }
 
     @Override
-    public void onPageSelected(int selectedPage) {
+    public void onHostNavigated(int selectedPage) {
         actionBar.selectTab(actionBar.getTabAt(selectedPage));
     }
 

@@ -29,7 +29,7 @@ public class ListViewNavigator extends Navigator {
     }
 
     @Override
-    public void onPageSelected(int selectedPage) {
+    public void onHostNavigated(int selectedPage) {
         this.listView.setItemChecked(selectedPage, true);
     }
 

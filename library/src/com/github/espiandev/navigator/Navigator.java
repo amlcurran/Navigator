@@ -30,14 +30,14 @@ public abstract class Navigator {
      * Called when the {@link android.support.v4.view.ViewPager} has scrolled to another page. Use this method to update your navigation control
      * @param selectedPage the page scrolled to
      */
-    public abstract void onPageSelected(int selectedPage);
+    protected abstract void onHostNavigated(int selectedPage);
 
     /**
      * Called when the {@link android.support.v4.view.ViewPager} has a list of pages and these should be fed into a navigation model. The Navigator
      * should therefore render these into the appropriate UI
      * @param labels list of the pages which the {@link android.support.v4.view.ViewPager} contains
      */
-    public abstract void bindNavigationItems(List<CharSequence> labels);
+    protected abstract void bindNavigationItems(List<CharSequence> labels);
 
     void setLinker(PagerNavigationLinker navigationAdapter) {
         this.navigationAdapter = navigationAdapter;
@@ -47,7 +47,7 @@ public abstract class Navigator {
      * Call this method when your navigation control has selected an item and wishes to notify the ViewPager
      * @param position the position of the selected item
      */
-    public void onNavigationItemSelected(int position) {
+    protected void onNavigationItemSelected(int position) {
         navigationAdapter.onNavigationItemSelected(position);
     }
 
